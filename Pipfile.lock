@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7b9fd631d5cf7afa20e78974ca196a916fd8e55011d2807f6d367cefe59f1710"
+            "sha256": "5887ede9a2883554d028734adb349094b05ba47f63fef5d92df440ae1d1f738a"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -27,6 +27,9 @@
         ]
     },
     "default": {
+        "adafruit-dht": {
+            "git": "https://github.com/adafruit/Adafruit_Python_DHT.git"
+        },
         "max7219": {
             "hashes": [
                 "sha256:52fb30fd90d593ecc4c47daca23eae96d2ca86aa40d55438375ddf4393147417"
