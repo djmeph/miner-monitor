@@ -12,7 +12,7 @@ from luma.core.interface.serial import spi, noop
 from luma.core.render import canvas
 from luma.core.virtual import viewport
 from luma.core.legacy import text, show_message
-from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_FONT, LCD_FONT
+from luma.core.legacy.font import proportional, LCD_FONT
 
 def demo(n, block_orientation, rotate):
   # create matrix device
@@ -22,7 +22,7 @@ def demo(n, block_orientation, rotate):
   Fahrenheit = 9.0/5.0 * Celsius + 32
   print json.dumps({ 'temp': Fahrenheit, 'humidity': Humidity })
   msg = 'Temp: {0:0.1f} F  Humidity: {1:0.1f} %'.format(Fahrenheit, Humidity)
-  show_message(device, msg, fill="white", font=proportional(CP437_FONT))
+  show_message(device, msg, fill="white", font=proportional(LCD_FONT))
 
 if __name__ == "__main__":
   try:
