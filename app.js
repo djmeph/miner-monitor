@@ -15,6 +15,7 @@ const MONGODB_URI = config.MONGODB_URI;
 
 const express = require("express");
 const http = require('http');
+const socket_io = require('socket.io');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const debug = require('debug')('http');
@@ -23,16 +24,16 @@ const mongoose = require('mongoose');
 
 //routes
 const index = require('./routes/index');
-//var api = require('./routes/api');
+//const api = require('./routes/api');
 
 mongoose.Promise = global.Promise;
-var promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
+const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
 promise.then(go, fail);
 
 function go (db) {
   console.log(inspect({"MongoDB connected on port": db.port }, opts));
 
-  var app = express();
+  const app = express();
 
   app.use(logger('dev'));
   app.set('views', __dirname + '/views');
@@ -55,12 +56,19 @@ function go (db) {
 
   // HTTP setup
 
-  var server = http.createServer(app);
+  const server = http.createServer(app);
+  const io = socket_io.listen(server);
+
   server.on('error', onError);
   server.on('listening', onListening);
   server.listen(PORT, function () {
     console.log(inspect({ "Listening on port": PORT }, opts));
   });
+  io.use(sharedsession(session, {
+    autoSave: true
+  }));
+
+  //Build Sockets
 
   //private functions
 
