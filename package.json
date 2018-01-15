@@ -4,6 +4,7 @@
   "description": "Monitor room temp, humidity, and watchdogs with a Raspberry Pi",
   "main": "app.js",
   "scripts": {
+    "start": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/djmeph/miner-monitor/issues"
   },
-  "homepage": "https://github.com/djmeph/miner-monitor#readme"
+  "homepage": "https://github.com/djmeph/miner-monitor#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "fs": "^0.0.1-security",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7"
+  }
 }
