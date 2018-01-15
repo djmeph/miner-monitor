@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install && gulp --type production"
   },
   "repository": {
     "type": "git",
@@ -19,11 +20,17 @@
   "homepage": "https://github.com/djmeph/miner-monitor#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bower": "^1.8.2",
     "debug": "^3.1.0",
     "express": "^4.16.2",
     "fs": "^0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.4.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-util": "^3.0.8",
     "mongoose": "^4.13.9",
     "morgan": "^1.9.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.4"
   }
 }

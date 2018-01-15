@@ -1,0 +1,22 @@
+{
+  "name": "miner-helper",
+  "description": "Monitor room temp, humidity, and watchdogs with a Raspberry Pi",
+  "main": "app.js",
+  "authors": [
+    "Norman Witte III"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/djmeph/miner-monitor",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}

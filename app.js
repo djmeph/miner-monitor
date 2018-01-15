@@ -22,6 +22,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 //routes
+const index = require('./routes/index');
 //var api = require('./routes/api');
 
 mongoose.Promise = global.Promise;
@@ -34,9 +35,12 @@ function go (db) {
   var app = express();
 
   app.use(logger('dev'));
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'pug');
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json({ type: 'application/json'}));
   app.use(express.static(path.join(__dirname, 'www')));
+  app.use('/', index);
   //app.use('/api', api);
 
   // production error handler
