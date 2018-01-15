@@ -26,6 +26,9 @@ const mongoose = require('mongoose');
 const index = require('./routes/index');
 //const api = require('./routes/api');
 
+//sockets
+const temp = require('./sockets/temp');
+
 mongoose.Promise = global.Promise;
 const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
 promise.then(go, fail);
@@ -57,18 +60,18 @@ function go (db) {
   // HTTP setup
 
   const server = http.createServer(app);
-  const io = socket_io.listen(server);
 
   server.on('error', onError);
   server.on('listening', onListening);
+
   server.listen(PORT, function () {
     console.log(inspect({ "Listening on port": PORT }, opts));
   });
-  io.use(sharedsession(session, {
-    autoSave: true
-  }));
+
+  const io = socket_io.listen(server);
 
   //Build Sockets
+  temp(io);
 
   //private functions
 
