@@ -1,13 +1,14 @@
-(function () {
+(function ($) {
   'use strict';
+
+  $('#temp').html('0.0');
+  $('#humidity').html('0.0');
 
   var socket = io.connect();
 
   socket.on('temp', function (data) {
-    console.log({
-      temp: parseFloat(data.temp).toFixed(1),
-      humidity: parseFloat(data.humidity).toFixed(1)
-    });
+    $('#temp').html(parseFloat(data.temp).toFixed(1));
+    $('#humidity').html(parseFloat(data.humidity).toFixed(1));
   });
 
-})();
+})(jQuery);

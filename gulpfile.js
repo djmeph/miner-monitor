@@ -26,6 +26,6 @@ gulp.task('js', function() {
     .pipe(gulp.dest('www'));
 });
 
-if (gutil.env.type !== 'production') gulp.watch('_src/**/*.js', ['js']);
+if (gutil.env.type !== 'production') gulp.watch('js/**/*.js', ['js']);
 
 gulp.task('default', ['less', 'js']);
