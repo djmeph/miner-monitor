@@ -24,7 +24,7 @@ function tempInterval () {
       setTimeout(tempInterval, 5000);
     } else {
       console.log(results);
-      setTimeout(tempInterval, 1000);
+      setTimeout(tempInterval, 500);
     }
   });
 }
