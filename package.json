@@ -25,13 +25,16 @@
     "express": "^4.16.2",
     "fs": "^0.0.1-security",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-less": "^3.4.0",
     "gulp-sourcemaps": "^2.6.3",
+    "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "mongoose": "^4.13.9",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
+    "python-shell": "^0.4.0",
     "socket.io": "^2.0.4"
   }
 }

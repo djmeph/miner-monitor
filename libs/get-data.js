@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = Module;
 
 function Module (req, res, next) {
