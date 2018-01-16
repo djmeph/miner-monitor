@@ -11,7 +11,7 @@ module.exports = Socket;
 
 function Socket (io) {
 
-  io.on('join', function (socket) {
+  io.on('connection', function (socket) {
     socket.join('miner-monitor');
   });
 
