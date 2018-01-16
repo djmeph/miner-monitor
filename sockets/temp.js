@@ -18,14 +18,14 @@ function Socket (io) {
   tempInterval();
 
   function tempInterval () {
-    python.run('../python/temp.py', options, function (err, results) {
+    python.run('temp.py', options, function (err, results) {
       if (err || results.length == 0) {
         console.error(err);
         setTimeout(tempInterval, 5000);
       } else {
         var json = JSON.parse(results[0]);
         io.to('miner-monitor').emit('temp', json);
-        setTimeout(tempInterval, 100);
+        setTimeout(tempInterval, 50);
       }
     });
   }
