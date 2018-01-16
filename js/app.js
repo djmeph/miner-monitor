@@ -5,8 +5,8 @@
 
   socket.on('temp', function (data) {
     console.log({
-      temp: parseFloat(data.temp).toFixed(2),
-      humidity: parseFloat(data.humidity).toFixed(2)
+      temp: parseFloat(data.temp).toFixed(1),
+      humidity: parseFloat(data.humidity).toFixed(1)
     });
   });
 
