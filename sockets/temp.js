@@ -1,5 +1,8 @@
 'use strict';
 
+const inspect = require('util').inspect;
+const opts = { colors: true, depth: Infinity };
+
 const path = require('path');
 const python = require('python-shell');
 const options = {
@@ -23,7 +26,7 @@ function tempInterval () {
       console.error(err);
       setTimeout(tempInterval, 5000);
     } else {
-      console.log(results);
+      console.log(inspect(results, opts));
       setTimeout(tempInterval, 500);
     }
   });
