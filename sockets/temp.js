@@ -22,11 +22,11 @@ function Socket (io) {
 
 function tempInterval () {
   python.run('../python/temp.py', options, function (err, results) {
-    if (err) {
+    if (err || results.length == 0) {
       console.error(err);
       setTimeout(tempInterval, 5000);
     } else {
-      console.log(inspect(results, opts));
+      console.log(inspect(results[0], opts));
       setTimeout(tempInterval, 500);
     }
   });
