@@ -26,8 +26,9 @@ function tempInterval () {
       console.error(err);
       setTimeout(tempInterval, 5000);
     } else {
-      console.log(inspect(results[0], opts));
-      setTimeout(tempInterval, 500);
+      var json = JSON.parse(results[0]);
+      console.log(inspect(json, opts));
+      setTimeout(tempInterval, 100);
     }
   });
 }
