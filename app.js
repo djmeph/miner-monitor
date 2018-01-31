@@ -21,7 +21,7 @@ const logger = require('morgan');
 const debug = require('debug')('http');
 const path = require('path');
 const os = require('os');
-const exec = require('child_process')
+const exec = require('child_process').exec;
 const ifaces = os.networkInterfaces();
 const mongoose = require('mongoose');
 
@@ -36,17 +36,13 @@ Object.keys(ifaces).forEach((ifname) => {
   var alias = 0;
   ifaces[ifname].forEach((iface) => {
     if (ifname == 'wlan0' || 'eth0') {
-      if ('IPv4' !== iface.family || iface.internal !== false) {
-        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-        return;
-      }
-      if (alias == 0) {
-        exec('./python/ip.py --string ' + iface.address, (err, stout, stderr) => {
-          mongoose.Promise = global.Promise;
-          const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
-          promise.then(go, fail);
-        });
-      }
+      if ('IPv4' !== iface.family || iface.internal !== false) return;
+      if (alias == 0) exec('python ./python/ip.py --string ' + iface.address, (err, stout, stderr) => {
+        if (stderr) console.log(inspect(stderr, opts));
+        mongoose.Promise = global.Promise;
+        const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
+        promise.then(go, fail);
+      });
       ++alias;
     }
   });
