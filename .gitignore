@@ -3,3 +3,4 @@ bower_components/
 config.json
 www/app.css
 www/app.js
+ecosystem.config.js

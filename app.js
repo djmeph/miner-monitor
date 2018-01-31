@@ -22,7 +22,7 @@ const debug = require('debug')('http');
 const path = require('path');
 const os = require('os');
 const python = require('python-shell');
-var ifaces = os.networkInterfaces();
+const ifaces = os.networkInterfaces();
 const mongoose = require('mongoose');
 
 //routes
@@ -37,17 +37,17 @@ Object.keys(ifaces).forEach((ifname) => {
     if (ifname == 'wlan0' || 'eth0') {
       var pythonOptions = {
         mode: 'text',
-        scriptPath: path.join(__dirname, 'python'),
+        scriptPath: path.join(__dirname, 'python', () => {
+          mongoose.Promise = global.Promise;
+          const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
+          promise.then(go, fail);
+        }),
         args: ['--string ' + iface.address]
       };
       python.run('ip.py', pythonOptions);
     }
   });
 });
-
-mongoose.Promise = global.Promise;
-const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
-promise.then(go, fail);
 
 function go (db) {
   console.log(inspect({"MongoDB connected on port": db.port }, opts));
