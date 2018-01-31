@@ -22,12 +22,12 @@ def demo(n, block_orientation, rotate, msg):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='matrix_demo arguments',
-      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  parser = argparse.ArgumentParser(description='matrix_demo arguments',
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--string', help='Display the local IP address')
+  parser.add_argument('--string', help='Display the local IP address')
 
-    args = parser.parse_args()
+  args = parser.parse_args()
 
   try:
     demo(4, -90, 0, args.string)

@@ -33,18 +33,26 @@ const index = require('./routes/index');
 const temp = require('./sockets/temp');
 
 Object.keys(ifaces).forEach((ifname) => {
+  var alias = 0;
   ifaces[ifname].forEach((iface) => {
     if (ifname == 'wlan0' || 'eth0') {
-      var pythonOptions = {
-        mode: 'text',
-        scriptPath: path.join(__dirname, 'python'),
-        args: ['--string ' + iface.address]
-      };
-      python.run('ip.py', pythonOptions, (err, results) => {
-        mongoose.Promise = global.Promise;
-        const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
-        promise.then(go, fail);
-      });
+      if ('IPv4' !== iface.family || iface.internal !== false) {
+        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+        return;
+      }
+      if (alias == 0) {
+        var pythonOptions = {
+          mode: 'text',
+          scriptPath: path.join(__dirname, 'python'),
+          args: ['--string ' + iface.address]
+        };
+        python.run('ip.py', pythonOptions, (err, results) => {
+          mongoose.Promise = global.Promise;
+          const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
+          promise.then(go, fail);
+        });
+      }
+      ++alias;
     }
   });
 });
