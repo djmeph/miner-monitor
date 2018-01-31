@@ -21,7 +21,7 @@ const logger = require('morgan');
 const debug = require('debug')('http');
 const path = require('path');
 const os = require('os');
-const python = require('python-shell');
+const exec = require('child_process')
 const ifaces = os.networkInterfaces();
 const mongoose = require('mongoose');
 
@@ -41,12 +41,7 @@ Object.keys(ifaces).forEach((ifname) => {
         return;
       }
       if (alias == 0) {
-        var pythonOptions = {
-          mode: 'text',
-          scriptPath: path.join(__dirname, 'python'),
-          args: ['--string ' + iface.address]
-        };
-        python.run('ip.py', pythonOptions, (err, results) => {
+        exec('./python/ip.py --string ' + iface.address, (err, stout, stderr) => {
           mongoose.Promise = global.Promise;
           const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
           promise.then(go, fail);
