@@ -37,14 +37,14 @@ Object.keys(ifaces).forEach((ifname) => {
     if (ifname == 'wlan0' || 'eth0') {
       var pythonOptions = {
         mode: 'text',
-        scriptPath: path.join(__dirname, 'python', () => {
-          mongoose.Promise = global.Promise;
-          const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
-          promise.then(go, fail);
-        }),
+        scriptPath: path.join(__dirname, 'python'),
         args: ['--string ' + iface.address]
       };
-      python.run('ip.py', pythonOptions);
+      python.run('ip.py', pythonOptions, (err, results) => {
+        mongoose.Promise = global.Promise;
+        const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
+        promise.then(go, fail);
+      });
     }
   });
 });
