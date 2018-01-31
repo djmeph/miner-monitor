@@ -20,6 +20,8 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const debug = require('debug')('http');
 const path = require('path');
+const os = require('os');
+var ifaces = os.networkInterfaces();
 const mongoose = require('mongoose');
 
 //routes
@@ -28,6 +30,26 @@ const index = require('./routes/index');
 
 //sockets
 const temp = require('./sockets/temp');
+
+Object.keys(ifaces).forEach(function (ifname) {
+  var alias = 0;
+
+  ifaces[ifname].forEach(function (iface) {
+    if ('IPv4' !== iface.family || iface.internal !== false) {
+      // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+      return;
+    }
+
+    if (alias >= 1) {
+      // this single interface has multiple ipv4 addresses
+      console.log(ifname + ':' + alias, iface.address);
+    } else {
+      // this interface has only one ipv4 adress
+      console.log(ifname, iface.address);
+    }
+    ++alias;
+  });
+});
 
 mongoose.Promise = global.Promise;
 const promise = mongoose.connect(MONGODB_URI, { useMongoClient: true });
