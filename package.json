@@ -20,22 +20,22 @@
   "homepage": "https://github.com/djmeph/miner-monitor#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "bower": "^1.8.2",
+    "bower": "^1.8.4",
     "debug": "^3.1.0",
-    "express": "^4.16.2",
-    "fs": "^0.0.1-security",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-less": "^3.4.0",
-    "gulp-sourcemaps": "^2.6.3",
+    "gulp-less": "^3.5.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
-    "mongoose": "^4.13.9",
+    "mongoose": "^4.13.12",
     "morgan": "^1.9.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^2.0.3",
     "python-shell": "^0.4.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.1.0"
   }
 }
